@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Image;
 use App\Post;
+use App\Carousel;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -98,16 +99,18 @@ class PostsController extends Controller
 
     public function display($slug)
     {
+        $carousels = Carousel::all();
         $cates = Category::all();
         $post = Post::with('categories')->where('post_slug', $slug)->first();
-        return view('posts.detail', compact('post', 'cates'));
+        return view('posts.detail', compact('post', 'cates', 'carousels'));
     }
     public function postbycate($slug){
+        $carousels = Carousel::all();
         $cates = Category::all();
         $categories = Category::where('cate_slug','LIKE',$slug)->firstOrFail();
         $posts = Post::with('categories')->where('cateId',$categories->id)->latest()->paginate(2);
 
-        return view('posts.postsbycate', compact('cates', 'posts', 'categories'));
+        return view('posts.postsbycate', compact('cates', 'posts', 'categories', 'carousels'));
     }
 
     /**

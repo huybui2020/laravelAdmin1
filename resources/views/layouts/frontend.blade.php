@@ -108,9 +108,11 @@
     font-family: tahoma;
     font-size: 13px;max-width: 80%; display: block; margin: 0 auto;
 }
+.carousel-inner{max-height: 280px !important}
 @media only screen and (max-width: 768px)
 {
     #leftside {display: none}
+    .carousel-inner{max-height: 280px !important}
 }
 
 </style>

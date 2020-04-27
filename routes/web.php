@@ -39,3 +39,13 @@ Route::resource('admin/posts', 'Admin\\PostsController');
 Route::get('/tin-tuc/{slug}', 'Admin\\PostsController@display' );
 Route::get('/{slug}','Admin\\PostsController@postbycate' );
 
+
+Route::resource('admin/images', 'Admin\\ImagesController');
+Route::resource('admin/images', 'Admin\\ImagesController');
+Route::resource('admin/images', 'Admin\\ImagesController');
+Route::resource('admin/img', 'Admin\\ImgController');
+Route::resource('admin/images', 'Admin\\ImagesController');
+Route::resource('admin/images', 'Admin\\ImagesController');
+Route::resource('admin/carousel', 'Admin\\CarouselController');
+Route::resource('admin/carousels', 'Admin\\CarouselsController');
+Route::resource('admin/carousels', 'Admin\\CarouselsController');

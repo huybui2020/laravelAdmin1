@@ -7,23 +7,20 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <style>
-                        img{ display: block; margin: 0 auto; }
-                    </style>
-                    <div class="card-header">Post {{ $post->id }}</div>
+                    <div class="card-header">Carousel {{ $carousel->id }}</div>
                     <div class="card-body">
 
-                        <a href="{{ url('/admin/posts') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
-                        <a href="{{ url('/admin/posts/' . $post->id . '/edit') }}" title="Edit Post"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                        <a href="{{ url('/admin/carousels') }}" title="Back"><button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/admin/carousels/' . $carousel->id . '/edit') }}" title="Edit Carousel"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['admin/posts', $post->id],
+                            'url' => ['admin/carousels', $carousel->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i> Delete', array(
                                     'type' => 'submit',
                                     'class' => 'btn btn-danger btn-sm',
-                                    'title' => 'Delete Post',
+                                    'title' => 'Delete Carousel',
                                     'onclick'=>'return confirm("Confirm delete?")'
                             ))!!}
                         {!! Form::close() !!}
@@ -34,12 +31,9 @@
                             <table class="table">
                                 <tbody>
                                     <tr>
-                                        <th>ID</th><td>{{ $post->id }}</td>
+                                        <th>ID</th><td>{{ $carousel->id }}</td>
                                     </tr>
-                                    <tr><th> Post Title </th><td> {{ $post->post_title }} </td></tr>
-                                    <tr><th> Post Slug </th><td>{{ $post->post_slug }}</td></tr>
-                                    <tr><th> Post Teaser </th><td> {!! $post->post_teaser !!} </td></tr>
-                                    <tr><th> Post Content </th><td> {!! $post->post_content !!} </td></tr>
+                                    <tr><th> Image Name </th><td> {{ $carousel->image_name }} </td></tr>
                                 </tbody>
                             </table>
                         </div>
