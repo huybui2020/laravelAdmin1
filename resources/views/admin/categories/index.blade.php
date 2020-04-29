@@ -37,7 +37,14 @@
                                 @foreach($categories as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->cate_name }}</td><td>{{ $item->cate_slug }}</td>
+                                        <td>{{ $item->cate_name }}</td>
+                                        <td>{{ $item->cate_slug }}</td>
+                                        <td><a href="{{route('update_cate_active',$item->id)}}">
+                                        @if($item->cate_active == 1)
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                        @else
+                                        <i class="fa fa-circle-o" aria-hidden="true"></i>
+                                        @endif</a></td>
                                         <td>
                                             <a href="{{ url('/admin/categories/' . $item->id) }}" title="View Category"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/admin/categories/' . $item->id . '/edit') }}" title="Edit Category"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

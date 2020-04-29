@@ -8,7 +8,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <!-- Styles -->
         <style>
             html, body {
@@ -61,7 +62,24 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .container{
+                text-align: left !important
+            }
+            .container h2{
+                font-weight: 600;
+                font-size: 22px;
+                padding-left: 15px;
+               
+            }
+            a:link{
+                text-decoration: none;
+            }
+            .teaser{
+                font-weight: 400 !important;
+                text-algin: justify;
+            }
         </style>
+
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -84,15 +102,28 @@
                     Laravel
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <div class="container">
+                @foreach($catespost as $cate)
+                
+                
+                <div class="row">
+                <h2><a href="{{'/'.$cate->cate_slug}}">{{$cate->cate_name}}</a></h2>
+                @foreach($cate->posts as $post)
+                
+                    
+                    <div class="col-md-3">
+                   <a href="{{'/tin-tuc/'.$post->post_slug}}"><h4>{{$post->post_title}}</h4></a>
+                    <br>
+                    <a href="{{'/tin-tuc/'.$post->post_slug}}"><img src="{{'/Uploads/Posts/'.$post->post_image}}" style="width:100%; max-width:100%"></a>
+                    <br>
+                    <br>
+                    <p class="teaser" style="font-weight: 400 !important">{!!$post->post_teaser!!}</p>
+                    </div>
+                    
+                
+                @endforeach
+                </div>
+                @endforeach
                 </div>
             </div>
         </div>

@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@welcome');
 
 Auth::routes();
 
@@ -49,3 +47,6 @@ Route::resource('admin/images', 'Admin\\ImagesController');
 Route::resource('admin/carousel', 'Admin\\CarouselController');
 Route::resource('admin/carousels', 'Admin\\CarouselsController');
 Route::resource('admin/carousels', 'Admin\\CarouselsController');
+
+Route::get('carousel/{id}/activve', 'Admin\\CarouselsController@isActive')->name('update_active');
+Route::get('/categories/{id}/active', 'Admin\\CategoriesController@isActive')->name('update_cate_active');

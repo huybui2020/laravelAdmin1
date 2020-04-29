@@ -22,6 +22,7 @@ class CarouselsController extends Controller
 
         if (!empty($keyword)) {
             $carousels = Carousel::where('image_name', 'LIKE', "%$keyword%")
+                ->orWhere('active', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
             $carousels = Carousel::latest()->paginate($perPage);
@@ -48,8 +49,11 @@ class CarouselsController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(Request $request)
-    {
+    {    $this->validate($request, [
+        'active' => 'in:true, false, 1, 0, "1", and "0"',
+    ]);
         $carousel = new Carousel();
+        $carousel->active = $request->active;
         if ($request->hasFile('image_name')) {
             $image = $request->file('image_name');
             $name =  time().'.'.$image->getClientOriginalExtension();
@@ -101,11 +105,10 @@ class CarouselsController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
-    {
-        
-        $requestData = $request->all();
-        
+    {  
+        $requestData = $request->all();        
         $carousel = Carousel::findOrFail($id);
+        $carousel->active = $request->active;
         if ($request->hasFile('image_name')) {        
             $image = $request->file('image_name');
             $name =  time().'.'.$image->getClientOriginalExtension();
@@ -119,7 +122,13 @@ class CarouselsController extends Controller
 
         return redirect('admin/carousels')->with('flash_message', 'Carousel updated!');
     }
-
+    public function isActive($id)
+    {
+	$carousel = Carousel::findOrFail($id);
+        $carousel->active = $carousel->active == true ? false : true;  //hoặc ngắn gọn: $cate->active = !$cate->active
+	$carousel->save();
+        return redirect()->back()->with('success', 'success ');
+     }
     /**
      * Remove the specified resource from storage.
      *

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Category;
+use App\Post;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('welcome');
     }
 
     /**
@@ -23,7 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // $catespost = Category::with('posts')->where('active', true)->groupBy('id')->get();
         return view('home');
     }
-    
+    public function welcome()
+    {
+        $catespost = Category::with('posts')->where('cate_active', true)->groupBy('id')->get();
+        // dd($catespost);
+        return view('welcome', compact('catespost'));
+    }
 }

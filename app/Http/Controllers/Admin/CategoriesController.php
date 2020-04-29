@@ -129,4 +129,11 @@ class CategoriesController extends Controller
 
         return redirect('admin/categories')->with('flash_message', 'Category deleted!');
     }
+    public function isActive($id)
+    {
+	$cate = Category::findOrFail($id);
+    $cate->cate_active = $cate->cate_active == true ? false : true;  //hoặc ngắn gọn: $cate->active = !$cate->active
+	$cate->save();
+        return redirect()->back()->with('success', 'success ');
+     }
 }

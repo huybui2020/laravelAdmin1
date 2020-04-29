@@ -30,7 +30,7 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>#</th><th>Image Name</th><th>Actions</th>
+                                        <th>#</th><th>Image Name</th><th>Active</th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -38,6 +38,12 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->image_name }}</td>
+                                        <td><a href="{{route('update_active',$item->id)}}"
+                                        >@if($item->active == true)
+                                         <i class="fa fa-check" aria-hidden="true"></i>
+                                         @else
+                                          <i class="fa fa-circle-o" aria-hidden="true"></i>
+                                          @endif</a></td>
                                         <td>
                                             <a href="{{ url('/admin/carousels/' . $item->id) }}" title="View Carousel"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i></button></a>
                                             <a href="{{ url('/admin/carousels/' . $item->id . '/edit') }}" title="Edit Carousel"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
